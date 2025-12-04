@@ -12,7 +12,6 @@ import {
   IDocument,
   IFilterDocuments, selectFilters,
   selectItems,
-  selectLoading,
   selectTotal, TSortDirection
 } from '@app/features';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
@@ -209,6 +208,7 @@ export class DocumentsListComponent implements OnInit {
 
     this._updateQueryParams({
       sortDirection: nextDirection,
+      page: 1,
     });
   }
 }
