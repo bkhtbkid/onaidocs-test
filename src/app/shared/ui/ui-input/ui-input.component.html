@@ -1,0 +1,31 @@
+<mat-form-field appearance="fill" class="w-full">
+  @if (label()) {
+    <mat-label>{{ label() }}</mat-label>
+  }
+
+  <input
+    matInput
+    [type]="type() === 'password' && hidePassword() ? 'password' : 'text'"
+    [placeholder]="placeholder()"
+    [value]="value || ''"
+    (input)="onInputChange($event)"
+    (blur)="onTouched()"
+  />
+
+  @if (type() === 'password') {
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      (click)="onHidePasswordToggleClick()"
+    >
+      <mat-icon>{{
+          hidePassword() ? 'visibility' : 'visibility_off'
+        }}</mat-icon>
+    </button>
+  }
+
+  @if (error()) {
+    <mat-error>{{ error() }}</mat-error>
+  }
+</mat-form-field>

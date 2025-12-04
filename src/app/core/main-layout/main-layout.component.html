@@ -1,0 +1,13 @@
+<div class="px-10">
+  <header class="py-4 flex justify-end items-center gap-x-3">
+    <h4 class="font-bold">
+      {{ me?.name || "Пользователь" }}
+    </h4>
+    |
+    <button (click)="onExit()">Выйти</button>
+  </header>
+</div>
+<i class="border-b border-gray-300 w-full h-0.5 block"></i>
+<div class="px-10">
+  <router-outlet></router-outlet>
+</div>

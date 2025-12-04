@@ -7,34 +7,10 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 To start a local development server, run:
 
 ```bash
-ng serve
+ng serve or npm start
 ```
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
 ## Running unit tests
 
@@ -44,16 +20,38 @@ To execute unit tests with the [Karma](https://karma-runner.github.io) test runn
 ng test
 ```
 
-## Running end-to-end tests
+## Пароль должен состоять не менее из 6 символов. Ввод только на латинице
 
-For end-to-end (e2e) testing, run:
+## Короткое описание архитектуры и принятых решений
 
-```bash
-ng e2e
-```
+Использовал современных подход standalone компонентов.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Все максимально просто, в папке core лежат данные которые грузятся только 1 раз (непереиспользуемые компоненты)
 
-## Additional Resources
+В папке shared те компоненты, которые могут использоваться в разных компонентах. Для тестового использовал только dialog и ui-input максимально простой.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+В features уже непосредственно страницы и компоненты к ним.
+
+В папке assets файл с документами (мок данные) и 1 иконка для понятного отображения сортировки.
+
+В тестовом задании не имея определенного дизайна и сжатые сроки решил не сильно "париться" по поводу стилей и использовал tailwind и внутренние стили.
+
+По поводу "детального просмотра компонента" (в дальнейшем документ), храню его в сторе как и написано в ТЗ, но я бы реализовал иной подход, а именно при выборе документа передавал бы в кверипараметры айди и по ней показывал бы документ.
+
+Страница с документами:
+    поиск работает исключительно по названию (title),
+    сортировка реализована только по дате (можно добавить функционал для других полей),
+    скролл у таблицы работает и вертикально и горизонтально. В файл специально добавил длинные названия для проверки,
+    пагинация и количества отображения элементов также есть,
+    фильрацию сохраняю в кверипараметры,
+    список с документами сохраняю в sessionStorage чтобы была возможность добавлять и редактировать данные, 
+    фильтрацию решил сделать по статусам.
+
+Авторизация:
+    после авторизации сохраняется логин пользователя для отображения на странице,
+    на странице с авторизацией идет проверка пароля и функция просмотра пароля
+
+Другое:
+    сделал дополнительно 2 страницы с логином и документами.
+    использую sessionStorage для сохранения данных, если данных о токене нет, то перенаправляет на страницу логин используя гуард
+    для перевода статусов в общей таблице использую пайп, т.к. данные всегда статичные

@@ -1,0 +1,82 @@
+<div class="h-full flex flex-col border-l border-l-gray-300">
+  <div class="flex px-6 border-b border-gray-300">
+    <div class="flex justify-between gap-x-3 w-full py-4 items-start">
+      <h1 class="font-bold text-lg">
+        {{ givenDocument()?.title ?? "Создание документа" }}
+      </h1>
+      <button
+        (click)="onCloseMatDialog()"
+        class="inline-block w-[24px] h-[24px] hover:bg-neutral-300 rounded-md"
+      >X
+      </button>
+    </div>
+  </div>
+
+  @if (createOrEditForm) {
+    <form
+      [formGroup]="createOrEditForm"
+      (ngSubmit)="onSubmit()"
+      class="flex-1 flex flex-col px-6 py-4"
+    >
+      <div class="flex-1 flex flex-col gap-y-4 overflow-auto">
+        <label class="flex flex-col gap-y-1 text-sm">
+        <span class="font-medium">Название</span>
+        <input
+          type="text"
+          formControlName="title"
+          class="border rounded-md px-3 py-2 outline-none focus:border-blue-400"
+        />
+        </label>
+
+        <label class="flex flex-col gap-y-1 text-sm">
+          <span class="font-medium">Автор</span>
+          <input
+            type="text"
+            formControlName="author"
+            class="border rounded-md px-3 py-2 outline-none focus:border-blue-400"
+          />
+        </label>
+
+        <label class="flex flex-col gap-y-1 text-sm">
+          <span class="font-medium">Статус</span>
+          <select
+            formControlName="status"
+            class="border rounded-md px-3 py-2 outline-none focus:border-blue-400"
+          >
+            @for (status of statuses; track status.value) {
+              <option [value]="status.value"> {{ status.name }} </option>
+            }
+          </select>
+        </label>
+
+        <label class="flex flex-col gap-y-1 text-sm">
+          <span class="font-medium">Содержимое</span>
+          <textarea
+            formControlName="content"
+            rows="6"
+            class="border rounded-md px-3 py-2 outline-none focus:border-blue-400 resize-none h-full"
+          ></textarea>
+        </label>
+      </div>
+
+      <div class="mt-auto pt-4 flex justify-end gap-x-3 border-t border-gray-200">
+        <button
+          type="button"
+          (click)="onCloseMatDialog()"
+          class="px-4 py-2 rounded-md border border-gray-300 hover:bg-gray-100"
+        >
+          Отменить
+        </button>
+
+        <button
+          type="submit"
+          [disabled]="createOrEditForm.invalid"
+          class="px-4 py-2 rounded-md bg-blue-500 text-white
+                 disabled:bg-gray-300 disabled:text-gray-500"
+        >
+          {{ isEdit ? 'Сохранить' : 'Создать' }}
+        </button>
+      </div>
+    </form>
+  }
+</div>

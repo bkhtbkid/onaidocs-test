@@ -1,0 +1,32 @@
+<section class="bg-blue-50 p-6 min-h-screen flex justify-center items-center">
+  <div class="flex bg-white justify-center p-3 border-2 rounded-lg h-[500px]">
+    <form [formGroup]="form" class="p-20" (ngSubmit)="onSubmit()">
+      <h1 class="text-center text-2xl">Вход</h1>
+      <div class="w-[21.25rem] py-4 flex flex-col gap-y-4 justify-center">
+        <ui-input
+          type="text"
+          placeholder="Введите логин"
+          formControlName="login"
+          label="Логин"
+          [error]="loginErrorMessage"
+        ></ui-input>
+
+        <ui-input
+          type="password"
+          placeholder="Введите пароль"
+          formControlName="password"
+          label="Пароль"
+          [error]="passwordErrorMessage"
+        ></ui-input>
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="form.invalid"
+        class="p-3 text-center bg-blue-50 w-full rounded-lg hover:bg-blue-100 transition-colors duration-300 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed"
+      >
+        Зайти
+      </button>
+    </form>
+  </div>
+</section>
